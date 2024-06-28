@@ -7,6 +7,10 @@ on:
         description: '要下载的文件的 URL'
         required: true
         default: 'https://example.com/file.zip'
+      filename:
+        description: '保存下载文件的名称'
+        required: true
+        default: 'downloaded_file.zip'
 
 jobs:
   download:
@@ -19,7 +23,7 @@ jobs:
     - name: 下载文件
       run: |
         echo "Downloading file from URL: ${{ github.event.inputs.download_url }}"
-        curl -L -O "${{ github.event.inputs.download_url }}"
+        curl -L "${{ github.event.inputs.download_url }}" -o "${{ github.event.inputs.filename }}"
 
     - name: 配置Git
       run: |
@@ -30,6 +34,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        git add .
+        git add "${{ github.event.inputs.filename }}"
         git commit -m "Add downloaded file"
         git push
