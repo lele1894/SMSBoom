@@ -1,4 +1,4 @@
-name: 🚀 Run SMSBoom in Action
+name: 🚀 运行SMSBoom
 
 # 触发 Action 的条件
 on: 
@@ -8,6 +8,11 @@ on:
   #     - cron: '30 5 * * 2,4'
   # 手动触发
   workflow_dispatch:
+    inputs:
+      phone_number:
+        description: '电话号码'
+        required: true
+        default: ''
 
 jobs:
   build:
@@ -26,4 +31,4 @@ jobs:
         # 此处可以自定义命令行运行参数.替换手机号
         run: |
           pip3 install -r requirements.txt
-          python3 smsboom.py run -p ${{ secrets.NUMBER }} -t 32
+          python3 smsboom.py run -p ${{ github.event.inputs.phone_number }} -t 32
