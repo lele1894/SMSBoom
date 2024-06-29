@@ -28,8 +28,7 @@ jobs:
           python-version: '3.8'
       
       - name: 🚀 Run SMSBoom Script
-        # 此处可以自定义命令行运行参数.替换手机号
+        # 此处可以自定义命令行运行参数.替换手机号 python3 smsboom.py run -p ${{ github.event.inputs.phone_number }} -t 32
         run: |
           pip3 install -r requirements.txt
-          # python3 smsboom.py run -p ${{ github.event.inputs.phone_number }} -t 32
-          python3 smsboom.py run -p 15838605922 -t 32
+          python3 smsboom.py run -p 13938099875 -t 32
